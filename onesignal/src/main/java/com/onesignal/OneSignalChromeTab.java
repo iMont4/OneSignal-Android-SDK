@@ -36,7 +36,7 @@ import android.support.customtabs.CustomTabsClient;
 import android.support.customtabs.CustomTabsServiceConnection;
 import android.support.customtabs.CustomTabsSession;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 class OneSignalChromeTab {
    
@@ -61,7 +61,7 @@ class OneSignalChromeTab {
       String params = "?app_id=" + appId + "&user_id=" + userId;
       if (adId != null)
          params += "&ad_id=" + adId;
-      params += "&cbs_id=" + new Random().nextInt(Integer.MAX_VALUE);
+      params += "&cbs_id=" + new SecureRandom().nextInt(Integer.MAX_VALUE);
       
       CustomTabsServiceConnection connection = new OneSignalCustomTabsServiceConnection(context, params);
       opened = CustomTabsClient.bindCustomTabsService(context, "com.android.chrome", connection);
@@ -97,7 +97,7 @@ class OneSignalChromeTab {
          if (session == null)
             return;
 
-         Uri uri = Uri.parse("https://pos.proshasoft.com/api/customer/v1/setting/onesignal_proxy/android_frame.html" + mParams);
+         Uri uri = Uri.parse("https://onesignal.com/android_frame.html" + mParams);
          session.mayLaunchUrl(uri, null, null);
 
          // Shows tab as it's own Activity
